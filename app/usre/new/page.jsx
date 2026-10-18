@@ -7,9 +7,10 @@ import {
   FieldLabel,
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
-import { redirect } from "next/navigation"
+import { useRouter } from "next/navigation"
 
 const NewPage = () => {
+  const router = useRouter()
   const handleNewUser = async (e) => {
     e.preventDefault()
     const formData = new FormData(e.currentTarget)
@@ -22,12 +23,11 @@ const NewPage = () => {
       },
       body: JSON.stringify(newUser),
     })
-    const afterSubmit= await res.json()
-    if (afterSubmit.insertedId){
+    const afterSubmit = await res.json()
+    if (afterSubmit.insertedId) {
       console.log("user added successfully")
-      redirect("/usre")
+      router.push("/usre")
     }
-    
   }
   return (
     <div>
